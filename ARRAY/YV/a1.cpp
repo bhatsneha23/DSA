@@ -10,7 +10,7 @@ class Solution {
         for(int i = 0 ; i < nums.size() ; i++){
             int rem = target - nums[i];
 
-            if (mp.find(rem)!=mp.end()){
+            if (mp.find(rem)!=mp.end()){  //mtlb present hai
                 return {mp[rem],i};
             }
             mp[nums[i]] = i ;
