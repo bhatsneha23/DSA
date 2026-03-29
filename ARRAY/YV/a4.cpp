@@ -1,15 +1,21 @@
-bool containsNearbyDuplicate(vector<int>& nums , int k) {
-    unordered_set<int> st;
+#include<vector>
+#include <unordered_map> 
+using namespace std ;
+class Solution {
+    public:
+    bool containsNearDuplicate(vector<int>& nums , int k){
+        unordered_map<int, int> mp ;
 
-    for(int i = 0 ; i < nums.size() ; i++){
-        if(st.find(nums[i]!=st.end())
-            return true;
-
-            st.insert(nums[i]);
-        if(st.size() > k){
-            st.erase(nums[i-k]);
+        for(int i = 0 ; i <nums.size() ; i++){
+            if (mp.count(nums[i])) {
+                if( i - mp[nums[i]] < k){
+                    return true;
+                }
+            }
+            mp[nums[i]] = i;
         }
+        return false;
 
     }
-    return false;
-}
+
+};
