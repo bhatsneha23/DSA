@@ -4,50 +4,35 @@ public:
         vector<int> neg;
         vector<int> pos;
 
-        for (int num : nums) {
-            if (num < 0)
-                neg.push_back(num);
-            else
-                pos.push_back(num);
-        }
-
-        int n1 = neg.size();
-        int n2 = pos.size();
-
-        // Square negative numbers
-        for (int i = 0; i < n1; i++) {
-            neg[i] = neg[i] * neg[i];
-        }
-
-        // Reverse because larger absolute values come first
-        reverse(neg.begin(), neg.end());
-
-        // Square positive numbers
-        for (int i = 0; i < n2; i++) {
-            pos[i] = pos[i] * pos[i];
-        }
-
-        vector<int> res(n1 + n2);
-
-        int i = 0, j = 0, id = 0;
-
-        // Merge two sorted arrays
-        while (i < n1 && j < n2) {
-            if (neg[i] <= pos[j]) {
-                res[id++] = neg[i++];
+        for(int num : nums) {
+            if (num < 0){
+                neg.push_back(num * num);
             } else {
-                res[id++] = pos[j++];
+                pos.push_back(num * num);
             }
         }
+            
+            reverse(neg.begin() , neg.end());
 
-        while (i < n1) {
-            res[id++] = neg[i++];
-        }
+            int i = 0 , j = 0;
+            vector<int> ans;
 
-        while (j < n2) {
-            res[id++] = pos[j++];
-        }
+            while(i < neg.size() && j < pos.size()){
+                if (neg[i]<=pos[j]){
+                    ans.push_back(neg[i++]);
+                }
+                else{
+                    ans.push_back(pos[j++]);
+                }
+            }
 
-        return res;
+            while (i < neg.size()){
+                ans.push_back(neg[i++]);
+            }
+            
+            while (j < pos.size()){
+                ans.push_back(pos[j++]);
+            }
+            return ans;
     }
 };
